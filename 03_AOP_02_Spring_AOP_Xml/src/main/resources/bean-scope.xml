@@ -1,0 +1,40 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop" 	 
+
+
+
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.2.xsd 
+
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-3.2.xsd  
+
+	">
+ 
+ <bean id="performerBean"
+		class="com.Performer" />
+		
+		<bean id="audienceBean"
+		class="com.Audience" />
+
+<aop:config>
+<aop:aspect ref="audienceBean"> 
+<aop:pointcut id="performerPointCut" expression="execution(* com..Performer.performShow(..))" />
+
+<aop:before 		pointcut-ref="performerPointCut" method="takeSeats" /> 
+
+<aop:before 		pointcut-ref="performerPointCut" method="putCellSwitchOff" /> 
+
+<aop:after-returning pointcut-ref="performerPointCut"  method="clapclap" /> 
+
+<aop:after-throwing pointcut-ref="performerPointCut" method="nasty" /> 
+<aop:after  pointcut-ref="performerPointCut" method="commonMethod" /> 
+
+</aop:aspect>
+
+</aop:config> 
+
+
+</beans>

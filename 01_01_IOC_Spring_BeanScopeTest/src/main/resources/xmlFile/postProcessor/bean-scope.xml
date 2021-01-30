@@ -1,0 +1,46 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.2.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.2.xsd"
+	default-init-method="myInit" 
+	default-destroy-method="myDestroy"
+	>
+ 
+
+	
+
+
+	<bean id="empBean"  class="com.BeanPostProcessor.Employee" autowire="constructor" >
+	<qualifier value="main1"/>
+		 <constructor-arg index="0" value="20"/>
+         <constructor-arg index="1" value="saylee......"/>
+          
+
+	</bean>
+	
+	
+
+	
+	
+
+	
+    <bean id="addBean1"  class="com.BeanPostProcessor.Address">
+    <qualifier value="main1"></qualifier>
+<!--     	  <property name="addLine1" value="House No. 90......"></property>
+    <property name="addLine2" value="Diwanman Gaon........."></property>
+ -->    
+      <property name="addLine1" value="${add.line1}"></property>
+    <property name="addLine2" value="${add.line2}"></property>
+   
+	</bean>
+	
+ <!-- <bean   class="com.BeanPostProcessor.DisplayBeanProcessor"/> -->
+ <bean   class="com.BeanPostProcessor.MyCustomProcessor"/>
+ <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+ <property name="locations" value="classpath:com/BeanPostProcessor/employee.config"/>
+ </bean>
+	
+	
+</beans>
